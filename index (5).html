@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Portal do Aluno — Ricardo Schiavon · Studio Fit Personal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#F8F7F4;--bg2:#F1F4F2;--card:#FFFFFF;--ink:#20242A;--ink2:#303741;--muted:#697280;--soft:#98A2B3;--line:#E6E4DF;--line2:#EEF0EA;--teal:#007C78;--teal2:#0A8F86;--tealDark:#075E56;--tealSoft:#E5F5F2;--mag:#C0265C;--mag2:#D44472;--magSoft:#FBE8F0;--green:#11845B;--greenSoft:#EAF8F0;--amber:#B7791F;--amberSoft:#FFF5DA;--red:#C2413A;--redSoft:#FDECEC;--shadow:0 20px 70px rgba(16,24,40,.10);--r:24px;--r2:18px;}
+*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}
+body{min-height:100vh;font-family:"Manrope","DM Sans",system-ui,sans-serif;color:var(--ink);background:radial-gradient(circle at 5% 15%,rgba(0,124,120,.11),transparent 28%),radial-gradient(circle at 92% 5%,rgba(192,38,92,.10),transparent 26%),linear-gradient(135deg,#fff 0%,var(--bg) 52%,#F4F9F7 100%);line-height:1.5;-webkit-font-smoothing:antialiased}
+.page{max-width:1180px;margin:0 auto;padding:28px 22px 56px}
+.bg-mark{position:fixed;inset:0;pointer-events:none;opacity:.65;overflow:hidden;z-index:-1}
+.bg-mark:before{content:"";position:absolute;top:42px;left:-80px;width:260px;height:260px;border:1px solid rgba(0,124,120,.23);border-radius:50%}
+.bg-mark:after{content:"";position:absolute;right:-140px;bottom:-120px;width:360px;height:360px;border:1px solid rgba(192,38,92,.18);border-radius:50%}
+.brand{display:flex;align-items:center;justify-content:center;gap:14px;margin:6px 0 30px}
+.sf-symbol{width:64px;height:48px;display:grid;place-items:center;position:relative}
+.sf-symbol span{font-size:34px;line-height:1;letter-spacing:-5px;font-weight:800;background:linear-gradient(110deg,var(--teal),var(--teal2) 48%,var(--mag) 52%,var(--mag2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.sf-symbol:after{content:"";position:absolute;width:58px;height:58px;border-radius:50%;border:1.5px solid rgba(0,124,120,.25);border-left-color:rgba(192,38,92,.45);transform:rotate(-18deg)}
+.brand-name{font-size:22px;font-weight:800;letter-spacing:8px;color:var(--tealDark);text-transform:uppercase}
+.brand-sub{margin-top:2px;font-size:12px;font-weight:800;letter-spacing:7px;color:var(--mag);text-transform:uppercase;text-align:center}
+.hero{min-height:690px;display:grid;grid-template-columns:.95fr 1.05fr;align-items:center;gap:42px;padding:24px 0 34px}
+.hero-copy{padding-left:8px}
+.kicker{display:inline-flex;align-items:center;gap:8px;padding:9px 14px;border:1px solid rgba(0,124,120,.14);background:rgba(255,255,255,.72);border-radius:999px;color:var(--tealDark);font-size:12px;font-weight:800;letter-spacing:1.8px;text-transform:uppercase;box-shadow:0 10px 30px rgba(16,24,40,.04)}
+.kicker i{width:8px;height:8px;border-radius:50%;background:linear-gradient(90deg,var(--teal),var(--mag));display:block}
+.hero h1{margin-top:28px;font-size:clamp(54px,7.5vw,92px);line-height:.94;letter-spacing:-4px;font-weight:800;color:var(--ink)}
+.hero h1 .teal{color:var(--teal)}.hero h1 .mag{color:var(--mag)}
+.hero .sub{max-width:480px;margin-top:30px;font-size:clamp(20px,2.2vw,28px);line-height:1.25;color:var(--ink2);font-weight:500}
+.hero .sub strong{color:var(--mag);font-weight:800}
+.feature-stack{margin-top:44px;display:grid;gap:26px}
+.feature{display:grid;grid-template-columns:58px 1fr;align-items:center;gap:16px}
+.icon{width:58px;height:58px;border-radius:50%;border:2px solid currentColor;display:grid;place-items:center;color:var(--teal);background:rgba(255,255,255,.72)}
+.icon svg{width:28px;height:28px;stroke:currentColor;fill:none;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+.feature:nth-child(2) .icon{color:var(--mag)}
+.feature-title{font-size:18px;color:var(--tealDark);font-weight:800;line-height:1.15}
+.feature:nth-child(2) .feature-title{color:var(--mag)}
+.feature-text{color:var(--muted);font-size:17px;line-height:1.25}
+.device-wrap{display:flex;justify-content:center;align-items:center}
+.device{width:min(100%,560px);border:14px solid #22272E;border-radius:34px;background:#22272E;box-shadow:var(--shadow);transform:rotate(-2deg)}
+.screen{border-radius:22px;overflow:hidden;background:#FDFDFC;min-height:590px;border:1px solid rgba(255,255,255,.7)}
+.screen-head{padding:24px;background:radial-gradient(circle at 92% 10%,rgba(192,38,92,.13),transparent 26%),linear-gradient(135deg,#FFFFFF 0%,#F6FBFA 100%);border-bottom:1px solid var(--line2)}
+.screen-user{display:flex;align-items:center;justify-content:space-between;gap:14px}
+.user-meta small{display:block;color:var(--soft);font-weight:800;letter-spacing:.7px;text-transform:uppercase;font-size:10px}
+.user-meta h2{margin-top:4px;color:var(--ink);font-size:20px;letter-spacing:-.6px;line-height:1.08}
+.status-pill{display:flex;align-items:center;gap:8px;color:var(--green);background:var(--greenSoft);border:1px solid rgba(17,132,91,.14);padding:9px 12px;border-radius:999px;white-space:nowrap;font-size:12px;font-weight:800}
+.status-pill span{width:8px;height:8px;background:var(--green);border-radius:50%}
+.metric-row{margin-top:20px;display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.mini-card{padding:16px 14px;border:1px solid var(--line);border-radius:18px;background:#fff;box-shadow:0 8px 20px rgba(16,24,40,.045)}
+.mini-label{font-size:11px;color:var(--muted);font-weight:800;margin-bottom:8px}
+.mini-val{font-size:22px;font-weight:800;letter-spacing:-1px;color:var(--green)}
+.mini-sub{font-size:11px;color:var(--soft);font-weight:700}
+.screen-body{padding:20px 24px 24px}
+.victory{background:linear-gradient(135deg,var(--tealDark),#087C73);color:#fff;border-radius:22px;padding:18px;display:flex;gap:14px;align-items:flex-start;box-shadow:0 12px 30px rgba(7,94,86,.16)}
+.victory-icon{width:40px;height:40px;border-radius:14px;display:grid;place-items:center;background:rgba(255,255,255,.13);flex:none}
+.victory h3{font-size:16px;line-height:1.16}
+.victory p{margin-top:4px;font-size:12px;color:rgba(255,255,255,.80)}
+.body-grid{margin-top:16px;display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.composition{border:1px solid var(--line);border-radius:20px;padding:17px;background:#fff}
+.composition h4,.risk h4,.recent h4{font-size:13px;color:var(--ink);margin-bottom:12px}
+.donut{width:94px;height:94px;border-radius:50%;background:conic-gradient(var(--teal) 0 77.69%,var(--amber) 77.69% 100%);display:grid;place-items:center;margin:auto}
+.donut:before{content:"";width:58px;height:58px;border-radius:50%;background:#fff}
+.legend{margin-top:12px;display:grid;gap:7px;font-size:11px;color:var(--muted)}
+.legend span{display:flex;align-items:center;gap:7px}
+.legend i{width:8px;height:8px;border-radius:50%;display:block}
+.risk{border-radius:20px;padding:17px;background:linear-gradient(135deg,var(--amber),#C97A10);color:#fff}
+.risk h4{color:#fff}.risk .risk-big{font-size:20px;font-weight:800;margin:4px 0 8px}
+.risk p{font-size:12px;color:rgba(255,255,255,.85)}
+.recent{margin-top:14px;border:1px solid var(--line);border-radius:20px;padding:16px;background:#fff}
+.recent-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.recent-card{border:1px solid var(--line2);border-radius:14px;padding:12px 10px;text-align:center;background:#fff}
+.recent-card b{display:block;color:var(--green);font-size:16px}
+.recent-card span{font-size:10px;color:var(--muted);font-weight:700}
+.hero-bottom{margin-top:16px;text-align:center;font-size:13px;letter-spacing:8px;color:var(--tealDark);font-weight:800;text-transform:uppercase}
+.hero-line{height:1px;max-width:720px;margin:24px auto 0;background:linear-gradient(90deg,transparent,rgba(0,124,120,.45),transparent)}
+.tagline{margin-top:18px;text-align:center;color:var(--muted);letter-spacing:2px;font-size:13px}
+.tagline strong{color:var(--mag)}
+.sticky-nav{position:sticky;top:0;z-index:20;margin:18px auto 0;max-width:920px;display:flex;justify-content:center;gap:6px;padding:8px;border:1px solid var(--line);border-radius:999px;background:rgba(255,255,255,.78);backdrop-filter:blur(14px);box-shadow:0 8px 24px rgba(16,24,40,.05)}
+.tab{border:0;background:transparent;padding:12px 18px;border-radius:999px;color:var(--muted);font-size:13px;font-weight:800;cursor:pointer;transition:.18s}
+.tab.active{background:linear-gradient(135deg,var(--teal),var(--teal2));color:#fff;box-shadow:0 9px 24px rgba(0,124,120,.18)}
+.section{margin-top:28px;display:none}.section.active{display:block}
+.section-title{display:flex;align-items:flex-end;justify-content:space-between;gap:18px;margin-bottom:18px}
+.section-title h2{font-size:28px;letter-spacing:-.9px}
+.section-title p{color:var(--muted);max-width:420px}
+.grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+.card{background:rgba(255,255,255,.84);border:1px solid var(--line);border-radius:var(--r);padding:22px;box-shadow:0 8px 24px rgba(16,24,40,.045)}
+.card-label{color:var(--soft);font-size:11px;letter-spacing:1.4px;font-weight:800;text-transform:uppercase}
+.card-value{margin-top:10px;font-size:36px;line-height:1;letter-spacing:-1.5px;font-weight:800}
+.card-value.green{color:var(--green)}.card-value.teal{color:var(--teal)}.card-value.mag{color:var(--mag)}.card-value.amber{color:var(--amber)}.card-value.red{color:var(--red)}
+.card-text{margin-top:10px;color:var(--muted);font-size:14px}
+.badge{margin-top:15px;display:inline-flex;align-items:center;gap:7px;border-radius:999px;padding:7px 11px;font-size:12px;font-weight:800}
+.badge.green{background:var(--greenSoft);color:var(--green);border:1px solid rgba(17,132,91,.13)}
+.badge.teal{background:var(--tealSoft);color:var(--tealDark);border:1px solid rgba(0,124,120,.14)}
+.badge.amber{background:var(--amberSoft);color:var(--amber);border:1px solid rgba(183,121,31,.14)}
+.badge.mag{background:var(--magSoft);color:var(--mag);border:1px solid rgba(192,38,92,.14)}
+.badge.red{background:var(--redSoft);color:var(--red);border:1px solid rgba(194,65,58,.14)}
+.highlight{display:grid;grid-template-columns:1.4fr 1fr;gap:16px;margin-top:16px}
+.big-win h3{font-size:24px;letter-spacing:-.5px;margin-top:10px;line-height:1.2}
+.big-win h3 span{color:var(--teal)}.big-win p{margin-top:10px;color:var(--muted);font-size:15px}
+.journey{display:grid;grid-template-columns:1fr auto 1fr auto 1fr auto 1fr;align-items:center;gap:8px;text-align:center}
+.step{border-radius:18px;padding:14px 10px}
+.step.red{background:var(--redSoft)}.step.amber{background:var(--amberSoft)}.step.teal{background:var(--tealSoft)}.step.green{background:var(--greenSoft)}
+.step b{display:block;font-size:18px;letter-spacing:-.5px}
+.step.red b{color:var(--red)}.step.amber b{color:var(--amber)}.step.teal b{color:var(--teal)}.step.green b{color:var(--green)}
+.step small{display:block;font-size:10px;color:var(--soft);font-weight:700;margin-top:2px}
+.step span{display:block;font-size:10px;font-weight:800;margin-top:5px}
+.step.red span{color:var(--red)}.step.amber span{color:var(--amber)}.step.teal span{color:var(--teal)}.step.green span{color:var(--green)}
+.arrow{font-size:20px;color:var(--soft)}
+.compare{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.compare-card{border-radius:var(--r2);padding:20px;border:1px solid var(--line);background:#fff}
+.compare-card h3{font-size:14px;font-weight:800;margin-bottom:14px}
+.compare-card.red h3{color:var(--red)}.compare-card.amber h3{color:var(--amber)}.compare-card.teal h3{color:var(--teal)}.compare-card.green h3{color:var(--green)}
+.comp-row{display:flex;justify-content:space-between;gap:10px;padding:10px 0;border-bottom:1px solid var(--line2);color:var(--muted);font-size:12px}
+.comp-row:last-child{border-bottom:0}.comp-row b{color:var(--ink);font-size:14px}
+.comp-row b.better{color:var(--green)}.comp-row b.worse{color:var(--red)}.comp-row b.same{color:var(--amber)}
+.timeline{position:relative;padding-left:34px}
+.timeline:before{content:"";position:absolute;left:10px;top:6px;bottom:6px;width:3px;border-radius:99px;background:linear-gradient(var(--red),var(--amber),var(--teal),var(--green))}
+.titem{position:relative;margin-bottom:22px}.titem:last-child{margin-bottom:0}
+.tdot{position:absolute;left:-32px;top:8px;width:22px;height:22px;background:#fff;border:4px solid var(--teal);border-radius:50%}
+.titem.red .tdot{border-color:var(--red)}.titem.amber .tdot{border-color:var(--amber)}.titem.teal .tdot{border-color:var(--teal)}.titem.green .tdot{border-color:var(--green)}
+.tcontent h3{font-size:19px;letter-spacing:-.4px}
+.tcontent .date{font-size:12px;color:var(--soft);font-weight:800;letter-spacing:1.2px;text-transform:uppercase;margin-bottom:4px}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin:13px 0}
+.chip{border:1px solid var(--line);background:#fff;border-radius:999px;padding:7px 10px;font-size:12px;font-weight:800;color:var(--muted)}
+.note{padding:16px;border-radius:18px;color:var(--muted);line-height:1.55;font-size:14px}
+.note.amber{background:var(--amberSoft)}.note.teal{background:var(--tealSoft)}.note.green{background:var(--greenSoft)}.note.red{background:var(--redSoft)}
+.win-list{display:grid;gap:12px}
+.win{display:grid;grid-template-columns:58px 1fr auto;align-items:center;gap:16px;padding:18px;border:1px solid var(--line);border-radius:22px;background:#fff}
+.win-ico{width:58px;height:58px;border-radius:18px;display:grid;place-items:center;color:var(--teal);background:var(--tealSoft)}
+.win-ico.green{color:var(--green);background:var(--greenSoft)}
+.win-ico.mag{color:var(--mag);background:var(--magSoft)}
+.win-ico svg{width:28px;height:28px;stroke:currentColor;fill:none;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+.win h3{font-size:17px;letter-spacing:-.3px}.win p{font-size:13px;color:var(--muted);margin-top:2px}
+.win b{color:var(--green);font-size:26px;letter-spacing:-1px;white-space:nowrap}
+.win b.teal{color:var(--teal)}
+/* Força table */
+.forca-table{width:100%;border-collapse:collapse;margin-top:8px}
+.forca-table th{text-align:left;font-size:11px;color:var(--soft);font-weight:800;letter-spacing:1px;text-transform:uppercase;padding:0 0 12px}
+.forca-table td{padding:12px 0;border-bottom:1px solid var(--line2);font-size:14px;color:var(--muted);vertical-align:middle}
+.forca-table tr:last-child td{border-bottom:0}
+.forca-table td:first-child{font-weight:700;color:var(--ink)}
+.forca-table td:nth-child(2){color:var(--red);font-weight:700}
+.forca-table td:nth-child(3){color:var(--green);font-weight:800;font-size:16px}
+.forca-mult{display:inline-flex;align-items:center;gap:4px;background:var(--greenSoft);color:var(--green);border-radius:999px;padding:3px 8px;font-size:11px;font-weight:800;border:1px solid rgba(17,132,91,.14)}
+.footer{margin-top:34px;padding:32px 0 4px;text-align:center;color:var(--muted)}
+.footer b{color:var(--tealDark)}
+.footer-line{width:min(720px,88%);height:1px;background:linear-gradient(90deg,transparent,rgba(0,124,120,.34),rgba(192,38,92,.30),transparent);margin:0 auto 20px}
+@media(max-width:1060px){.compare{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:980px){.hero{grid-template-columns:1fr;gap:22px;min-height:unset}.hero-copy{padding-left:0}.device{max-width:640px;transform:none}.grid-4{grid-template-columns:repeat(2,1fr)}.highlight{grid-template-columns:1fr}.compare{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:680px){.page{padding:18px 14px 38px}.brand{margin-bottom:16px}.brand-name{font-size:17px;letter-spacing:5px}.brand-sub{font-size:10px;letter-spacing:5px}.hero h1{font-size:52px;letter-spacing:-3px}.hero .sub{font-size:19px}.feature-stack{gap:18px;margin-top:32px}.feature{grid-template-columns:48px 1fr}.icon{width:48px;height:48px}.feature-title{font-size:16px}.feature-text{font-size:15px}.device{border-width:9px;border-radius:26px}.screen{border-radius:17px;min-height:auto}.metric-row{grid-template-columns:1fr}.body-grid{grid-template-columns:1fr}.recent-grid{grid-template-columns:1fr}.sticky-nav{justify-content:flex-start;overflow-x:auto;border-radius:20px}.tab{white-space:nowrap;padding:10px 14px}.grid-4,.grid-3,.grid-2{grid-template-columns:1fr}.journey{grid-template-columns:1fr;gap:10px}.arrow{transform:rotate(90deg)}.win{grid-template-columns:48px 1fr}.win b{grid-column:2;font-size:22px}.section-title{display:block}.section-title p{margin-top:8px}.compare{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="bg-mark"></div>
+<main class="page">
+
+  <header class="brand">
+    <div class="sf-symbol"><span>SF</span></div>
+    <div class="brand-text">
+      <div class="brand-name">Studio Fit</div>
+      <div class="brand-sub">Personal</div>
+    </div>
+  </header>
+
+  <section class="hero" id="topo">
+    <div class="hero-copy">
+      <div class="kicker"><i></i> Portal do Aluno</div>
+      <h1>Quem não <span class="teal">monitora,</span><br><span class="mag">adivinha.</span></h1>
+      <p class="sub">Sua evolução é <strong>medida de verdade.</strong></p>
+      <div class="feature-stack">
+        <div class="feature">
+          <div class="icon"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+          <div><div class="feature-title">−16,5 kg de peso total</div><div class="feature-text">em 9 meses de programa</div></div>
+        </div>
+        <div class="feature">
+          <div class="icon"><svg viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="m7 14 4-4 3 3 5-6"/></svg></div>
+          <div><div class="feature-title">−20,86 kg de gordura</div><div class="feature-text">com força dobrada em todos os exercícios</div></div>
+        </div>
+        <div class="feature">
+          <div class="icon"><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/><circle cx="12" cy="12" r="10"/></svg></div>
+          <div><div class="feature-title">+4,36 kg de massa magra</div><div class="feature-text">mesmo durante uso de Monjaro</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="device-wrap">
+      <div class="device">
+        <div class="screen">
+          <div class="screen-head">
+            <div class="screen-user">
+              <div class="user-meta">
+                <small>Olá, Ricardo</small>
+                <h2>Programa 9 meses<br>Emagrecimento + Força</h2>
+              </div>
+              <div class="status-pill"><span></span>Evoluindo</div>
+            </div>
+            <div class="metric-row">
+              <div class="mini-card"><div class="mini-label">Gordura perdida</div><div class="mini-val">−20,9kg</div><div class="mini-sub">40,65kg → 19,79kg</div></div>
+              <div class="mini-card"><div class="mini-label">% Gordura</div><div class="mini-val">−16,3pts</div><div class="mini-sub">38,64% → 22,31%</div></div>
+              <div class="mini-card"><div class="mini-label">IMC</div><div class="mini-val">28,64</div><div class="mini-sub">Era 33,96 Ob.I</div></div>
+            </div>
+          </div>
+          <div class="screen-body">
+            <div class="victory">
+              <div class="victory-icon"><svg width="22" height="22" viewBox="0 0 24 24" stroke="white" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 21h8"/><path d="M12 17v4"/><path d="M7 4h10v4a5 5 0 0 1-10 0V4Z"/><path d="M17 5h3a2 2 0 0 1-2 3"/><path d="M7 5H4a2 2 0 0 0 2 3"/></svg></div>
+              <div><h3>Saiu de Obesidade Grau I para Excesso de Peso</h3><p>−16,5kg · −20,86kg de gordura · +4,36kg de músculo</p></div>
+            </div>
+            <div class="body-grid">
+              <div class="composition">
+                <h4>Composição atual</h4>
+                <div class="donut"></div>
+                <div class="legend">
+                  <span><i style="background:var(--teal)"></i>Massa magra: 68,91kg</span>
+                  <span><i style="background:var(--amber)"></i>Gordura: 19,79kg</span>
+                  <span><i style="background:var(--green)"></i>Queda de 16,3 pontos</span>
+                </div>
+              </div>
+              <div class="risk"><h4>Zona de risco</h4><div class="risk-big">ATENÇÃO</div><p>RCQ 1,01 ainda em faixa Alto — cintura 104cm. Próxima meta: reduzir abaixo de 102cm.</p></div>
+            </div>
+            <div class="recent">
+              <h4>Conquistas do programa</h4>
+              <div class="recent-grid">
+                <div class="recent-card"><b>−16,5kg</b><span>Peso total</span></div>
+                <div class="recent-card"><b>−16,3pts</b><span>% Gordura</span></div>
+                <div class="recent-card"><b>−15cm</b><span>Abdômen</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="hero-bottom">Método • Força • Resultados reais</div>
+  <div class="hero-line"></div>
+  <div class="tagline">Inteligência. Força. <strong>Transformação real.</strong></div>
+
+  <nav class="sticky-nav">
+    <button class="tab active" onclick="showSection('resumo',this)">Resumo</button>
+    <button class="tab" onclick="showSection('composicao',this)">Composição</button>
+    <button class="tab" onclick="showSection('evolucao',this)">Evolução</button>
+    <button class="tab" onclick="showSection('conquistas',this)">Conquistas</button>
+  </nav>
+
+  <!-- RESUMO -->
+  <section class="section active" id="resumo">
+    <div class="section-title"><div><h2>Resumo atual</h2><p>Os dados mais importantes do acompanhamento, organizados para decisão precisa.</p></div></div>
+    <div class="grid-4">
+      <div class="card"><div class="card-label">Peso atual</div><div class="card-value green">88,7kg</div><p class="card-text">Iniciou com 105,2kg — queda de 16,5kg em 9 meses.</p><span class="badge green">−16,5kg</span></div>
+      <div class="card"><div class="card-label">% Gordura</div><div class="card-value green">22,31%</div><p class="card-text">Era 38,64% — queda histórica de 16,3 pontos percentuais.</p><span class="badge green">−16,3pts</span></div>
+      <div class="card"><div class="card-label">Massa magra</div><div class="card-value teal">68,91kg</div><p class="card-text">Cresceu +4,36kg mesmo com uso de Monjaro.</p><span class="badge teal">+4,36kg</span></div>
+      <div class="card"><div class="card-label">Modo atual</div><div class="card-value mag">A</div><p class="card-text">Redução de gordura prioritária. Cintura ainda acima de 102cm.</p><span class="badge amber">Em ajuste</span></div>
+    </div>
+    <div class="highlight">
+      <div class="card big-win">
+        <div class="card-label">Marco do programa</div>
+        <h3>De Obesidade Grau I a <span>Excesso de Peso</span> em 9 meses.</h3>
+        <p>Perdeu 20,86kg de gordura pura, saiu de IMC 33,96 para 28,64 e ainda ganhou +4,36kg de massa magra com o protocolo de força mantido durante o uso de Monjaro. Força dobrou ou triplicou em todos os exercícios.</p>
+        <span class="badge green">Transformação metabólica real</span>
+      </div>
+      <div class="card">
+        <div class="card-label">Próxima meta</div>
+        <div class="card-value amber">Ago/26</div>
+        <p class="card-text">Reduzir cintura abaixo de 102cm, % gordura abaixo de 18% e consolidar IMC abaixo de 27.</p>
+        <span class="badge teal">Próxima avaliação: Ago/2026</span>
+      </div>
+    </div>
+    <div class="card" style="margin-top:16px">
+      <div class="card-label">Jornada do peso — 4 avaliações</div>
+      <div class="journey" style="margin-top:18px">
+        <div class="step red"><b>105,2kg</b><small>Ago/2025</small><span>Ob. Grau I</span></div>
+        <div class="arrow">→</div>
+        <div class="step amber"><b>99,6kg</b><small>Dez/2025</small><span>Ob. Grau I</span></div>
+        <div class="arrow">→</div>
+        <div class="step teal"><b>96,7kg</b><small>Jan/2026</small><span>Ob. Grau I</span></div>
+        <div class="arrow">→</div>
+        <div class="step green"><b>88,7kg</b><small>Mai/2026</small><span>Exc. peso</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMPOSIÇÃO -->
+  <section class="section" id="composicao">
+    <div class="section-title"><div><h2>Composição corporal</h2><p>A evolução completa em 4 avaliações — de agosto de 2025 a maio de 2026.</p></div></div>
+    <div class="compare">
+      <div class="compare-card red">
+        <h3>Ago/2025 · Diagnóstico</h3>
+        <div class="comp-row"><span>Peso</span><b>105,2kg</b></div>
+        <div class="comp-row"><span>% Gordura</span><b>38,64%</b></div>
+        <div class="comp-row"><span>Massa magra</span><b>64,55kg</b></div>
+        <div class="comp-row"><span>Massa gorda</span><b>40,65kg</b></div>
+        <div class="comp-row"><span>IMC</span><b>33,96 Ob.I</b></div>
+        <div class="comp-row"><span>Cintura</span><b>119cm</b></div>
+        <div class="comp-row"><span>Abdômen</span><b>120cm</b></div>
+        <div class="comp-row"><span>RCQ</span><b>1,07 Alto</b></div>
+      </div>
+      <div class="compare-card amber">
+        <h3>Dez/2025 · Início Monjaro</h3>
+        <div class="comp-row"><span>Peso</span><b class="better">99,6kg</b></div>
+        <div class="comp-row"><span>% Gordura</span><b class="better">30,02%</b></div>
+        <div class="comp-row"><span>Massa magra</span><b class="better">69,70kg</b></div>
+        <div class="comp-row"><span>Massa gorda</span><b class="better">29,90kg</b></div>
+        <div class="comp-row"><span>IMC</span><b class="better">32,15 Ob.I</b></div>
+        <div class="comp-row"><span>Cintura</span><b class="better">117,5cm</b></div>
+        <div class="comp-row"><span>Abdômen</span><b class="better">118cm</b></div>
+        <div class="comp-row"><span>RCQ</span><b class="same">1,07 Alto</b></div>
+      </div>
+      <div class="compare-card teal">
+        <h3>Jan/2026 · Ajuste</h3>
+        <div class="comp-row"><span>Peso</span><b class="better">96,7kg</b></div>
+        <div class="comp-row"><span>% Gordura</span><b class="better">28,01%</b></div>
+        <div class="comp-row"><span>Massa magra</span><b class="same">69,61kg</b></div>
+        <div class="comp-row"><span>Massa gorda</span><b class="better">27,09kg</b></div>
+        <div class="comp-row"><span>IMC</span><b class="better">31,22 Ob.I</b></div>
+        <div class="comp-row"><span>Cintura</span><b>—</b></div>
+        <div class="comp-row"><span>Abdômen</span><b>—</b></div>
+        <div class="comp-row"><span>RCQ</span><b>—</b></div>
+      </div>
+      <div class="compare-card green">
+        <h3>Mai/2026 · Resultado</h3>
+        <div class="comp-row"><span>Peso</span><b class="better">88,7kg</b></div>
+        <div class="comp-row"><span>% Gordura</span><b class="better">22,31%</b></div>
+        <div class="comp-row"><span>Massa magra</span><b class="better">68,91kg</b></div>
+        <div class="comp-row"><span>Massa gorda</span><b class="better">19,79kg</b></div>
+        <div class="comp-row"><span>IMC</span><b class="better">28,64 Exc.peso</b></div>
+        <div class="comp-row"><span>Cintura</span><b class="better">104cm</b></div>
+        <div class="comp-row"><span>Abdômen</span><b class="better">107cm</b></div>
+        <div class="comp-row"><span>RCQ</span><b class="same">1,01 Alto</b></div>
+      </div>
+    </div>
+    <div class="grid-3" style="margin-top:16px">
+      <div class="card"><div class="card-label">Gordura eliminada</div><div class="card-value green">−20,86kg</div><p class="card-text">De 40,65kg para 19,79kg — queda de gordura pura.</p></div>
+      <div class="card"><div class="card-label">Massa magra ganha</div><div class="card-value teal">+4,36kg</div><p class="card-text">De 64,55kg para 68,91kg — músculo real mesmo durante Monjaro.</p></div>
+      <div class="card"><div class="card-label">Abdômen reduzido</div><div class="card-value green">−13cm</div><p class="card-text">De 120cm para 107cm — continua em direção à meta de 102cm.</p></div>
+    </div>
+  </section>
+
+  <!-- EVOLUÇÃO -->
+  <section class="section" id="evolucao">
+    <div class="section-title"><div><h2>Evolução acompanhada</h2><p>A linha do tempo completa — do diagnóstico ao resultado atual.</p></div></div>
+    <div class="card">
+      <div class="timeline">
+        <div class="titem red">
+          <div class="tdot"></div>
+          <div class="tcontent">
+            <div class="date">Agosto 2025 · Avaliação 1 — Diagnóstico</div>
+            <h3>Entrada: Obesidade Grau I. % gordura crítico, cintura e abdômen em risco alto.</h3>
+            <div class="chips"><span class="chip">Peso 105,2kg</span><span class="chip">%G 38,64%</span><span class="chip">M. Magra 64,55kg</span><span class="chip">Cintura 119cm</span><span class="chip">RCQ 1,07 Alto</span></div>
+            <div class="note red">Modo A definido. Objetivo: redução de gordura prioritária com força como eixo central. Sem Monjaro neste momento.</div>
+          </div>
+        </div>
+        <div class="titem amber">
+          <div class="tdot"></div>
+          <div class="tcontent">
+            <div class="date">Dezembro 2025 · Avaliação 2 — Início do Monjaro</div>
+            <h3>Queda de 5,6kg de peso e −10,75kg de gordura nos primeiros 4 meses. Massa magra cresceu.</h3>
+            <div class="chips"><span class="chip">Peso 99,6kg</span><span class="chip">%G 30,02%</span><span class="chip">M. Magra 69,70kg</span><span class="chip">Cintura 117,5cm</span><span class="chip">RCQ 1,07 Alto</span></div>
+            <div class="note amber">Monjaro iniciado. Protocolo de força mantido como prioridade absoluta para proteção muscular durante o emagrecimento acelerado.</div>
+          </div>
+        </div>
+        <div class="titem teal">
+          <div class="tdot"></div>
+          <div class="tcontent">
+            <div class="date">Janeiro 2026 · Avaliação 3 — Ajuste em curso</div>
+            <h3>Queda contínua: −2,9kg de peso, −2,81kg de gordura. Massa magra praticamente preservada.</h3>
+            <div class="chips"><span class="chip">Peso 96,7kg</span><span class="chip">%G 28,01%</span><span class="chip">M. Magra 69,61kg</span><span class="chip">M. Gorda 27,09kg</span></div>
+            <div class="note teal">Com Monjaro em curso, a queda de massa magra de Dez→Jan foi mínima (−0,09kg) com −2,81kg de gordura eliminada. O protocolo de força está funcionando como proteção muscular.</div>
+          </div>
+        </div>
+        <div class="titem green">
+          <div class="tdot"></div>
+          <div class="tcontent">
+            <div class="date">Maio 2026 · Avaliação 4 — Resultado consolidado</div>
+            <h3>IMC saiu de Obesidade Grau I para Excesso de Peso. Força dobrou ou triplicou em todos os exercícios.</h3>
+            <div class="chips"><span class="chip">Peso 88,7kg</span><span class="chip">%G 22,31%</span><span class="chip">M. Magra 68,91kg</span><span class="chip">Cintura 104cm</span><span class="chip">RCQ 1,01 Alto</span></div>
+            <div class="note green">Modo A consolidado. Em 9 meses: −20,86kg de gordura, +4,36kg de massa magra, cintura −15cm, abdômen −13cm. Próxima meta: cintura abaixo de 102cm e % gordura abaixo de 18%.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:16px">
+      <div class="card-label">Evolução da força — início vs. hoje</div>
+      <table class="forca-table" style="margin-top:8px">
+        <thead>
+          <tr>
+            <th>Exercício</th>
+            <th>Ago/2025</th>
+            <th>Mai/2026</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Remada baixa</td><td>25kg</td><td>40kg</td><td><span class="forca-mult">+60%</span></td></tr>
+          <tr><td>Puxada frente fechada</td><td>25kg</td><td>40kg</td><td><span class="forca-mult">+60%</span></td></tr>
+          <tr><td>Desenvolvimento halter</td><td>3kg</td><td>5kg</td><td><span class="forca-mult">+67%</span></td></tr>
+          <tr><td>Tríceps</td><td>10kg</td><td>20kg</td><td><span class="forca-mult">+100%</span></td></tr>
+          <tr><td>Levantamento terra</td><td>8kg</td><td>20kg</td><td><span class="forca-mult">+150%</span></td></tr>
+          <tr><td>Afundo</td><td>Não fazia</td><td>4kg</td><td><span class="forca-mult">Novo</span></td></tr>
+          <tr><td>Bike (cardio)</td><td>Carga 2 contínuo</td><td>Intervalado carga 3</td><td><span class="forca-mult">Evoluiu</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- CONQUISTAS -->
+  <section class="section" id="conquistas">
+    <div class="section-title"><div><h2>Conquistas mensuradas</h2><p>O progresso em números — e o que vem pela frente.</p></div></div>
+    <div class="win-list">
+      <div class="win">
+        <div class="win-ico green"><svg viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="m7 14 4-4 3 3 5-6"/></svg></div>
+        <div><h3>Gordura eliminada</h3><p>De 40,65kg para 19,79kg — 20,86kg de gordura pura perdida em 9 meses.</p></div>
+        <b>−20,86kg</b>
+      </div>
+      <div class="win">
+        <div class="win-ico green"><svg viewBox="0 0 24 24"><path d="M7 14c-2 0-3-1-3-3s2-5 5-7c1 3 3 4 6 4h1a4 4 0 0 1 0 8H9"/><path d="M7 14v5"/><path d="M17 14v5"/><path d="M7 19h10"/></svg></div>
+        <div><h3>Massa magra preservada e crescida</h3><p>+4,36kg de músculo real — mesmo durante emagrecimento com Monjaro. Protocolo de força funcionou.</p></div>
+        <b>+4,36kg</b>
+      </div>
+      <div class="win">
+        <div class="win-ico"><svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
+        <div><h3>IMC — saiu de Obesidade Grau I</h3><p>De 33,96 para 28,64. Passou de Obesidade Grau I para Excesso de Peso — uma categoria inteira.</p></div>
+        <b class="teal">−5,32</b>
+      </div>
+      <div class="win">
+        <div class="win-ico"><svg viewBox="0 0 24 24"><path d="M12 3v18"/><path d="M5 8h14"/><path d="m6 8 3 7H3l3-7Z"/><path d="m18 8 3 7h-6l3-7Z"/></svg></div>
+        <div><h3>Abdômen recuando</h3><p>De 120cm para 107cm — queda de 13cm. Próxima meta: abaixo de 102cm (critério OMS Modo A).</p></div>
+        <b class="teal">−13cm</b>
+      </div>
+      <div class="win">
+        <div class="win-ico green"><svg viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg></div>
+        <div><h3>Levantamento terra</h3><p>De 8kg para 20kg — ganho de 150% de carga. Exercício que não fazia com confiança na entrada.</p></div>
+        <b>+150%</b>
+      </div>
+      <div class="win">
+        <div class="win-ico mag"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg></div>
+        <div><h3>Condicionamento cardiovascular</h3><p>Saiu de bike carga 2 contínuo para intervalado carga 3 — adaptação cardiorrespiratória real.</p></div>
+        <b class="teal">Carga 3</b>
+      </div>
+    </div>
+    <div class="card" style="margin-top:16px">
+      <div class="card-label">Metas para Ago/2026</div>
+      <div class="grid-3" style="margin-top:16px">
+        <div><div class="card-value amber">&lt;18%</div><p class="card-text">% gordura continuando em queda.</p></div>
+        <div><div class="card-value teal">&lt;102cm</div><p class="card-text">Cintura entrando na zona de Modo B.</p></div>
+        <div><div class="card-value green">&lt;27</div><p class="card-text">IMC consolidado abaixo de sobrepeso.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-line"></div>
+    <p><b>Studio Fit Personal</b> · Sistema Vitalidade Inteligente 40+™</p>
+    <p>Sherley Ferreira · Método, acompanhamento e resultados reais.</p>
+  </footer>
+
+</main>
+<script>
+function showSection(id,btn){
+  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+  const nav=document.querySelector('.sticky-nav');
+  const y=nav.getBoundingClientRect().top+window.scrollY-12;
+  window.scrollTo({top:y,behavior:'smooth'});
+}
+</script>
+</body>
+</html>
